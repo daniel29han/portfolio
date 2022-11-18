@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Yelp Recommender : The Places You Didn&#39;t Know You Wanted to Visit | Dan Han</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="A regression model ">
+    <meta name="generator" content="Hugo 0.71.0" />
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="https://daniel29han.github.io/portfolio/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Yelp Recommender : The Places You Didn&#39;t Know You Wanted to Visit" />
+<meta property="og:description" content="A regression model " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://daniel29han.github.io/portfolio/post/chapter-2/" />
+<meta property="article:published_time" content="2022-10-15T11:00:59-04:00" />
+<meta property="article:modified_time" content="2022-10-15T11:00:59-04:00" /><meta property="og:site_name" content="Dan Han" />
+<meta itemprop="name" content="Yelp Recommender : The Places You Didn&#39;t Know You Wanted to Visit">
+<meta itemprop="description" content="A regression model ">
+<meta itemprop="datePublished" content="2022-10-15T11:00:59-04:00" />
+<meta itemprop="dateModified" content="2022-10-15T11:00:59-04:00" />
+<meta itemprop="wordCount" content="1584">
+
+
+
+<meta itemprop="keywords" content="Python,Data Analytics,Supervised Learning,Regression,Natural Language Processing,Sentiment Analysis,Neural Network,PyTorch,Data Visualization,Recommender,Content-Based Filtering,Collaborative Filtering,Deep Learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Yelp Recommender : The Places You Didn&#39;t Know You Wanted to Visit"/>
+<meta name="twitter:description" content="A regression model "/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  <header class="cover bg-top" style="background-image: url('https://daniel29han.github.io/portfolio/images/yelp_cover.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://daniel29han.github.io/portfolio/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Dan Han
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://daniel29han.github.io/portfolio/about/" title="About Me page">
+              About Me
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://daniel29han.github.io/portfolio/contact/" title="Contact page">
+              Contact
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://daniel29han.github.io/portfolio/post/" title="Projects page">
+              Projects
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+    <a href="https://github.com/daniel29han/dans_portfolio" target="_blank" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" rel="noopener" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    <a href="https://www.linkedin.com/in/daniel-han-337706b3/" target="_blank" class="Linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Linkedin link" rel="noopener" aria-label="follow on Linkedin——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">Yelp Recommender : The Places You Didn&#39;t Know You Wanted to Visit</h1>
+          
+            <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+              A regression model 
+            </h2>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        PROJECTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Yelp Recommender : The Places You Didn&#39;t Know You Wanted to Visit</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2022-10-15T11:00:59-04:00">October 15, 2022</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><figure>
+    <img src="https://daniel29han.github.io/portfolio/images/eaters-collective-i_xVfNtQjwI-unsplash.jpg"/> 
+</figure>
+
+<p>Yelp is an online platform where users can rate and write reviews on local businesses. Users can also browse the website to search for local businesses of their interest.</p>
+<p>To facilitate users&rsquo; browsing on Yelp’s website, this project aims to make customized recommendations on local businesses to every user.</p>
+<p>More than 200 thousand consumer reviews in the City of Santa Barbara, CA on Yelp were analyzed to study the attributes of users and businsesses that lead to good customer rating, and to implement various techniques for the machine to learn a given user&rsquo;s preferences.</p>
+<p>Based on the findings from the above, a program was written to compute two things given a user ID:</p>
+<ol>
+<li>
+<p>Find the user&rsquo;s favourite business (i.e., most highly-reviewed business), and then sort all the other businesses in the order of similarity to the favourite</p>
+</li>
+<li>
+<p>Predict the user’s likely ratings on all businesses on a continuous scale between 0 and 5.</p>
+</li>
+</ol>
+<p>Finally, a hybrid recommender was created such that it outputs ten businesses that are similar to the given user&rsquo;s favourite and/or predicted to be enjoyed by the given user.</p>
+<p>This project was the capstone project for my BrainStation Data Science Bootcamp.</p>
+<h3 id="why-did-i-do-this-project">Why Did I Do This Project?</h3>
+<ul>
+<li>
+<p>To study the characteristics of users and businesses leading to good experience and eventually good reviews.</p>
+</li>
+<li>
+<p>To improve user experience with the service by reducing browing time and effort and leave the impression that the service provider (Yelp) knows exactly what the users want - even when the users don’t know themselves!</p>
+</li>
+<li>
+<p>To better understand how Data Science can be utilized to improve customer satisfaction in the commercial setting.</p>
+</li>
+</ul>
+<h3 id="data-cleaning">Data Cleaning</h3>
+<p>As the first step, the original data in json format was converted to a more workable format (i.e. csv). Then, features were added and modified to be suitable for exploratory data analysis and modelling.</p>
+<p>Multiple tables - i.e. business, user, review, check-ins - were cleaned, reformatted and combined into a large table. Each row of this table contained the user ID, business ID, user attributes, business attributes, user review, and rating.</p>
+<p>Some critical information - i.e. the business hours, categories, and attributes - were formatted as texts containing many typos and exceptions, which called for extensive cleaning and normalization. This is done by using Regular Expression (RegEx) substitutions and user-defined element-wise functions.</p>
+<p>Furthermore, a discrete 1-to-5 star rating system is difficult to work with because one cannot rank businesses that are rated the same stars. To make the scale continuous, the users&rsquo; reviews were used to compute the sentiment and was combined with their star ratings to create a continuous rating from 0 to 5. This <code>adjusted rating</code> is what I aimed to predict for my regression models.</p>
+<p><em>Unwrangled Columns</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/data_unwrangled.jpg"/> 
+</figure>
+</p>
+<p><em>Wrangled Columns - One Hot Encoded</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/data_wrangled.jpg"/> 
+</figure>
+</p>
+<p><em>Data Cleaning Diagram</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/data_cleaning.jpg"/> 
+</figure>
+</p>
+<h3 id="in-general-what-causes-high-and-low-ratings">In General, What Causes High and Low Ratings?</h3>
+<p>Based on the exploratory data analysis, in general, it was found that there was no definitive attribute of a business or user that was highly correlated with the user rating. This signifies that every user has their own preferences, and the preferences are somewhat evenly distributed such that no attribute is related to a high or low rating.</p>
+<p>The only attributes relatively highly correlated to user ratings were the Yelp business rating, and user&rsquo;s average stars (rating).</p>
+<p><em>User&rsquo;s Average Stars and Business Rating vs Adjusted User Rating</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/yelp_eda.jpg"/> 
+</figure>
+</p>
+<h3 id="how-should-we-make-recommendations">How Should We Make Recommendations?</h3>
+<p>So what is a good recommender? One that recommends similar businesses to the ones a user have already tried? One that recommends businesses that are generally liked by most other users? Given the cleaned data and some insights on the business-user relationship, a couple different options for recommendation algorithms were considered:</p>
+<ol>
+<li>
+<p><strong>Content-Based Recommendation</strong> :</p>
+<ul>
+<li>
+<p>Create a matrix containing all pairwise cosine similarities between businesses</p>
+</li>
+<li>
+<p>Given a user&rsquo;s favourite (i.e., most highly rated) business, sort all the other businesses not yet reviewed by the user in the descending order of cosine similarity.</p>
+</li>
+<li>
+<p>From the sorted list of businesses, make <strong>n</strong> recommendations.</p>
+</li>
+<li>
+<p><em>Disadvantages</em> : What if the user wanted to be recommended something completely different from what they have already tried? What if even the user&rsquo;s most highly rated business is rated low (e.g. 0-2)?</p>
+</li>
+</ul>
+<p><em>T-SNE Plot for an Arbitrary User. Note the Recommendations based on Content-Based Filtering are Close to the User&rsquo;s Favourite</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/content_based.jpg"/> 
+</figure>
+</p>
+</li>
+<li>
+<p><strong>Collaborative Filtering</strong> :</p>
+<ul>
+<li>
+<p>Two types considered : user-based KNN approach, and SVD matrix factorization approach</p>
+</li>
+<li>
+<p><strong>User Based</strong> : Given a user U, find all other users who also rated the same businesses as the user U. Rank these other users in the descending order of cosine similarity to the user U in terms of their ratings on such businesses. Then, for every business not rated by U, determine the average rating of the top <strong>n</strong> users most similar to U as the predicted rating of U on each of those businesses.</p>
+</li>
+<li>
+<p><strong>SVD Matrix Factorization</strong> :</p>
+<ul>
+<li>
+<p>An m x n user-item review matrix is factored to the multiplication of two matrices - an m x p user matrix, and p x n item matrix.</p>
+</li>
+<li>
+<p>In our context, the p represents some arbitrarily created <em>businsess features</em>.</p>
+</li>
+<li>
+<p>In the m x p user matrix, the &ldquo;p-dimension&rdquo; is the users&rsquo; preferences for the p different features (e.g., how much a given user prefers a classy atmosphere). In the p x n item matrix, the &ldquo;p-dimension&rdquo; is how much a business belongs to the features (e.g., how classy an atmosphere a given restaurant has).</p>
+</li>
+<li>
+<p>In other words, the matrix factorization method algorithm attempts to quantify each user&rsquo;s preferences and businesses&rsquo; attributes given the input data containing user-item-rating.</p>
+</li>
+<li>
+<p>By matrix multiplication of these factored matrices, predict the pairwise ratings between all users and businesses.</p>
+</li>
+<li>
+<p>Finally, make <strong>n</strong> recommendations in the descending order of predicted ratings.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><em>Disadvantage</em> : Not as effective when there are not many users who rated the same business.</p>
+</li>
+</ul>
+<p><em>SVD Factorization. Image referenced from <a href="https://realpython.com/build-recommendation-engine-collaborative-filtering/">Real Python</a></em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/svd.jpg"/> 
+</figure>
+</p>
+</li>
+<li>
+<p><strong>Regression (with Neural Network)</strong> :</p>
+<ul>
+<li>
+<p>Using the review data, train a deep neural network to learn the relationship between all the user/business attributes and user ratings.</p>
+</li>
+<li>
+<p>Then, given a user id, predict all pairwise ratings between the given user and all other businesses.</p>
+</li>
+<li>
+<p>Finally, make <strong>n</strong> recommendations in the descending order of predicted ratings.</p>
+</li>
+<li>
+<p><em>Disadvantage</em> : The regression model will pay an especially closer attention to the features highly correlated with the label - i.e., the business rating and user average stars. Therefore, rather than focusing on each user&rsquo;s unique preferences, the model might lean toward recommending popular businesses.</p>
+</li>
+</ul>
+<p><em>T-SNE Plot for an Arbitrary User. Note the Recommendations based on NN Regression are Not Close to the User&rsquo;s Favourite</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/nn_recommender.jpg"/> 
+</figure>
+</p>
+</li>
+</ol>
+<h3 id="which-recommender-to-choose-can-we-mix-them-up">Which Recommender to Choose? Can We Mix Them Up?</h3>
+<p>Each recommender has their pros and cons. That said, content-based filtering was seen to be very effective in selecting similar businesses to one&rsquo;s favourite, while neural network regressor was good at making accurate predictions on user ratings regardless of their preferences.</p>
+<p>Combining these two models, our final, &lsquo;<strong>hybrid</strong>&rsquo; recommender is created. This one recommends businesses that are: A) similar to a given user&rsquo;s favourite and/or B) predicted to be liked by the user regardless of the similarity to any of the user&rsquo; previously tried businesses.</p>
+<p>But we can&rsquo;t always recommend similar businesses to the users&rsquo; most highly rated one; what if the user hated all the businesses they have tried and rated all of them low on Yelp? In this case, we can&rsquo;t recommend businesses that are similar to what that user hated.</p>
+<p>As such, we mainly consider two cases:</p>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/venn.jpg"/> 
+</figure>
+
+<ul>
+<li>Case 1 : When a user was satisfied with at least one of businesses they have tried.
+<ul>
+<li>When at least one business is rated high (i.e. &gt;= 4) by a given user, we make 10 recommendations in the following way:
+<ol>
+<li>Get the full list of businesses not yet reviewed by the user, in the descending order of cosine similarity to the user&rsquo;s most highly rated business (<strong>content-based filtering</strong>)</li>
+<li>Get the full list of businesses not yet reviewed by the user, in the descending order of ratings predicted <strong>using neural network</strong></li>
+<li>From the two lists each created in step 1. and 2., select the first five businesses appearing in both lists.</li>
+<li>From the content-based recommendations, select the top three businesses not appearing in the businesses selected in 3.</li>
+<li>From the neural network recommendations, select the top two businesses appearing in neither list from 3. and 4.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p><em>T-SNE Plot for an Arbitrary User Corresponding to Case 1. Note User Favourite vs Recommendations</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/hybrid_case_1.jpg"/> 
+</figure>
+</p>
+<ul>
+<li>Case 2 : When a user was not satisfied with any of the businesses they have tried.
+<ul>
+<li>Where no business is rated high (i.e. &lt; 4) by a given user, we make 10 recommendations in the following way:
+<ol>
+<li>Get the full list of businesses not yet reviewed by the user, in the descending order of ratings predicted <strong>using neural network</strong></li>
+<li>From the list created in step 1., select ten businesses for recommendation.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p><em>T-SNE Plot for an Arbitrary User Corresponding to Case 2. Note User Favourite vs Recommendations</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/hybrid_case_2.jpg"/> 
+</figure>
+</p>
+<h3 id="how-accurate-is-our-model">How Accurate is Our Model?</h3>
+<p>Different metrics were used to evaluate each of the recommendation algorithms:</p>
+<ul>
+<li>Content-based filtering was evaluated based on the <strong>mean cosine distance</strong> of the recommended businesses from the given user&rsquo;s favourite (or top n favourites)</li>
+<li>Regressor was evaluated on both <strong>Root Mean Square Error (RMSE)</strong> and <strong>Mean Absolute Error (MAE)</strong>.</li>
+</ul>
+<p>The error metric(s) of each algorithm is summarized as below:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Algorithm</th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left">Error Type(s) &amp; Value(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Content Based</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">Mean Cosine Distance : 0.2</td>
+</tr>
+<tr>
+<td align="left">NN Regressor</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">RMSE : 0.96 , MAE : 0.68</td>
+</tr>
+</tbody>
+</table>
+<p>You can review the entire work in more detail <a href="https://github.com/daniel29han/dans_portfolio/tree/main/Projects/Yelp">Here</a></p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/collaborative-filtering/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Collaborative Filtering</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/content-based-filtering/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Content-Based Filtering</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/data-analytics/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Data Analytics</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/data-visualization/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Data Visualization</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/deep-learning/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Deep Learning</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/natural-language-processing/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Natural Language Processing</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/neural-network/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Neural Network</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/python/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Python</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/pytorch/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">PyTorch</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/recommender/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Recommender</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/regression/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Regression</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/sentiment-analysis/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Sentiment Analysis</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/supervised-learning/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Supervised Learning</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="https://daniel29han.github.io/portfolio/post/chapter-1/">Quora Classifier : Is That a Serious Question?</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://daniel29han.github.io/portfolio/" >
+    &copy;  Dan Han 2022 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+    <a href="https://github.com/daniel29han/dans_portfolio" target="_blank" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" rel="noopener" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    <a href="https://www.linkedin.com/in/daniel-han-337706b3/" target="_blank" class="Linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Linkedin link" rel="noopener" aria-label="follow on Linkedin——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

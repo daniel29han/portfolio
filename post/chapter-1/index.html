@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Quora Classifier : Is That a Serious Question? | Dan Han</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="A classification model flagging insincere questions on Quora">
+    <meta name="generator" content="Hugo 0.71.0" />
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="https://daniel29han.github.io/portfolio/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Quora Classifier : Is That a Serious Question?" />
+<meta property="og:description" content="A classification model flagging insincere questions on Quora" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://daniel29han.github.io/portfolio/post/chapter-1/" />
+<meta property="article:published_time" content="2022-10-13T10:58:08-04:00" />
+<meta property="article:modified_time" content="2022-10-13T10:58:08-04:00" /><meta property="og:site_name" content="Dan Han" />
+<meta itemprop="name" content="Quora Classifier : Is That a Serious Question?">
+<meta itemprop="description" content="A classification model flagging insincere questions on Quora">
+<meta itemprop="datePublished" content="2022-10-13T10:58:08-04:00" />
+<meta itemprop="dateModified" content="2022-10-13T10:58:08-04:00" />
+<meta itemprop="wordCount" content="636">
+
+
+
+<meta itemprop="keywords" content="Python,Data Analytics,Supervised Learning,Classification,Natural Language Processing,Sentiment Analysis,Neural Network,Pretrained Model,Tensorflow,Keras,Data Visualization," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Quora Classifier : Is That a Serious Question?"/>
+<meta name="twitter:description" content="A classification model flagging insincere questions on Quora"/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  <header class="cover bg-top" style="background-image: url('https://daniel29han.github.io/portfolio/images/WordCloud.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://daniel29han.github.io/portfolio/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Dan Han
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://daniel29han.github.io/portfolio/about/" title="About Me page">
+              About Me
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://daniel29han.github.io/portfolio/contact/" title="Contact page">
+              Contact
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://daniel29han.github.io/portfolio/post/" title="Projects page">
+              Projects
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+    <a href="https://github.com/daniel29han/dans_portfolio" target="_blank" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" rel="noopener" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    <a href="https://www.linkedin.com/in/daniel-han-337706b3/" target="_blank" class="Linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Linkedin link" rel="noopener" aria-label="follow on Linkedin——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">Quora Classifier : Is That a Serious Question?</h1>
+          
+            <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+              A classification model flagging insincere questions on Quora
+            </h2>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        PROJECTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Quora Classifier : Is That a Serious Question?</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2022-10-13T10:58:08-04:00">October 13, 2022</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><figure>
+    <img src="https://daniel29han.github.io/portfolio/images/rubaitul-azad-8T_Hgvaz6xc-unsplash.jpg"/> 
+</figure>
+
+<p>Quora is a social question-and-answer website based in Mountain View, California, where users can collaborate by editing questions and commenting on answers that have been submitted by other users.</p>
+<p>While the convenience that anyone can post and edit questions on the forum allows users to dynamically engage in the service, the downside is that some users may post insincere questions which would compromise the reliability of the website and/or degrade other groups of individuals.</p>
+<p>In this hypothetical project, the characteristics of insincere questions on Quora were studied, and a classification model predicting whether or not a question in sincere was created using various machine learning techniques.</p>
+<h3 id="why-did-i-do-this-project">Why Did I Do this Project?</h3>
+<ul>
+<li>
+<p>To study what characteristics of language signify the insincerity of a question.</p>
+</li>
+<li>
+<p>To automate the process of classifiction such that, given a question, my model outputs the result instantly.</p>
+</li>
+<li>
+<p>To apply Data Science to promote healthy web environment and protect vulnerable groups from toxic contents.</p>
+</li>
+</ul>
+<h3 id="change-sentence-to-word-tokens">Change Sentence to Word &lsquo;Tokens&rsquo;</h3>
+<p>The very first step of the project was to turn the rows of questions into something that a machine could understand. In other words, the text data was convert to numerical vectors. This was done in three steps:</p>
+<ul>
+<li>
+<p>Using <code>Gensim</code>'s tokenizer, each question (which was in text format) was converted to a list of words. Punctuations and special characters were removed using this tokenizer.</p>
+</li>
+<li>
+<p>Common stopwords such as &lsquo;while&rsquo; or &lsquo;along,&rsquo; which do not contribute to the sentiment of a sentence, were removed.</p>
+</li>
+<li>
+<p>Different forms of the same word, such as &lsquo;having&rsquo; and &lsquo;has,&rsquo; were changed to their root word (i.e. &lsquo;have&rsquo;), which is referred to as lemmatization.</p>
+</li>
+</ul>
+<p>The above three steps were combined to a single function to automate the process.</p>
+<p><em>Data before Text Proecssing</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/before_text_cleaning.jpg"/> 
+</figure>
+</p>
+<p><em>Data after Text Proecssing</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/after_text_cleaning.jpg"/> 
+</figure>
+</p>
+<h3 id="what-words-are-in-insincere-questions">What Words are in Insincere Questions?</h3>
+<ul>
+<li>
+<p>Reviewed the words frequently appearing and relevant to the context using the bag-of-word and Tf-Idf mechanism.</p>
+</li>
+<li>
+<p>Displayed frequent &amp; relevant words using WordCloud.</p>
+</li>
+<li>
+<p>It was found that the words associated with insincere questions were largely related to race, religions, politics, sex, and violence.</p>
+</li>
+</ul>
+<p><em>Most Relevant Words to Insincere Questions</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/WordCloud.jpg"/> 
+</figure>
+</p>
+<p>Compared to the sincere questions, these controversial words appeared significantly more often in the insincere questions.</p>
+<p><em>Appearances of Controversial Words in Insincere Questions</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/controversial.jpg"/> 
+</figure>
+</p>
+<h3 id="vectorization--relevance-vs-characteristics-of-words">Vectorization : Relevance vs Characteristics of Words</h3>
+<p>Two options for converting the words to vectors were considered :</p>
+<ul>
+<li><strong>Tf-Idf</strong>, which focuses on the presence of certain relevant words in a question, and</li>
+<li><strong>BERT</strong>, which encodes every word to a vector that represents some contextual meaning</li>
+</ul>
+<p>Both are commonly used vectorization algorithms in the context of Natural Language Processing.</p>
+<h3 id="modelling--simple-algorithms-vs-neural-network">Modelling : Simple Algorithms vs Neural Network</h3>
+<p>The vectorized datasets were fed into machine learning models and hyperparameters were optimized to get the best accuracy, precision, recall, and F1 score. The data was imbalanced (i.e. most of the questions in my dataset were sincere), therefore more focus was put on optimizing the F1 score. Also, downsampling was conducted to ensure balanced data.</p>
+<p>For each of the two vectorized data, the following algorithms were considered:</p>
+<ul>
+<li>Tf-Idf : KNN, Random Forest, Logistic Regression, XGBoost, Naive Bayes</li>
+<li>BERT : Neural Network</li>
+</ul>
+<p><em>XGBoost Optimization</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/xgboost.jpg"/> 
+</figure>
+</p>
+<p>Following the hyperparameter optimization, the decision threshold yielding the highest F-1 Score was selected.</p>
+<p><em>Threshold Optimization</em>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/threshold.jpg"/> 
+</figure>
+</p>
+<h3 id="so-what-is-the-best-model">So What is the Best Model?</h3>
+<p>For each model considered, the confusion matrix was reviewed to see how many questions my model classified correctly and how many errors of each type it made.</p>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/confusion_matrix.jpg"/> 
+</figure>
+
+<p>Based on the comparison, the XGBoost model with Tf-Idf matrix was found to provide the highest F1 score of 0.53.</p>
+<h3 id="model-performance-review">Model Performance Review</h3>
+<p>Finally, the test set is run on the final model and results reviewed to see how well my model did. Based on the review, most questions classified as insincere did appear vulgar, degratory, sexual, and divisive.</p>
+<figure>
+    <img src="https://daniel29han.github.io/portfolio/images/insincerequestions.jpg" width="800"/> 
+</figure>
+
+<p>You can review the entire work in more detail <a href="https://github.com/daniel29han/dans_portfolio/tree/main/Projects/Quora">Here</a></p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/data-analytics/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Data Analytics</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/data-visualization/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Data Visualization</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/natural-language-processing/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Natural Language Processing</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/neural-network/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Neural Network</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/python/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Python</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/sentiment-analysis/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Sentiment Analysis</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/supervised-learning/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Supervised Learning</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/classification/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Classification</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/keras/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Keras</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/pretrained-model/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Pretrained Model</a>
+   </li>
+  
+   <li class="list di">
+     <a href="https://daniel29han.github.io/portfolio/tags/tensorflow/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Tensorflow</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://daniel29han.github.io/portfolio/" >
+    &copy;  Dan Han 2022 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+    <a href="https://github.com/daniel29han/dans_portfolio" target="_blank" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" rel="noopener" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    <a href="https://www.linkedin.com/in/daniel-han-337706b3/" target="_blank" class="Linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Linkedin link" rel="noopener" aria-label="follow on Linkedin——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

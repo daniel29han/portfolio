@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Analytics on Dan Han</title>
+    <link>https://daniel29han.github.io/portfolio/tags/data-analytics/</link>
+    <description>Recent content in Data Analytics on Dan Han</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 15 Oct 2022 11:00:59 -0400</lastBuildDate>
+    
+	<atom:link href="https://daniel29han.github.io/portfolio/tags/data-analytics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Yelp Recommender : The Places You Didn&#39;t Know You Wanted to Visit</title>
+      <link>https://daniel29han.github.io/portfolio/post/chapter-2/</link>
+      <pubDate>Sat, 15 Oct 2022 11:00:59 -0400</pubDate>
+      
+      <guid>https://daniel29han.github.io/portfolio/post/chapter-2/</guid>
+      <description>Yelp is an online platform where users can rate and write reviews on local businesses. Users can also browse the website to search for local businesses of their interest.
+To facilitate users&amp;rsquo; browsing on Yelp’s website, this project aims to make customized recommendations on local businesses to every user.
+More than 200 thousand consumer reviews in the City of Santa Barbara, CA on Yelp were analyzed to study the attributes of users and businsesses that lead to good customer rating, and to implement various techniques for the machine to learn a given user&amp;rsquo;s preferences.</description>
+    </item>
+    
+    <item>
+      <title>Quora Classifier : Is That a Serious Question?</title>
+      <link>https://daniel29han.github.io/portfolio/post/chapter-1/</link>
+      <pubDate>Thu, 13 Oct 2022 10:58:08 -0400</pubDate>
+      
+      <guid>https://daniel29han.github.io/portfolio/post/chapter-1/</guid>
+      <description>Quora is a social question-and-answer website based in Mountain View, California, where users can collaborate by editing questions and commenting on answers that have been submitted by other users.
+While the convenience that anyone can post and edit questions on the forum allows users to dynamically engage in the service, the downside is that some users may post insincere questions which would compromise the reliability of the website and/or degrade other groups of individuals.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,13 +1,17 @@
 # Yelp Rating Prediction
-*This is a hypothetical project where, given a set of information about a user and a local business, the user's rating on the business is predicted on a continuous scale between 0 and 5.*
+This project was completed as the capstone project for BrainStation Data Science Diploma Program. It is a hypothetical project where a cusomized recommender is created such that, given a set of information about a user and a local business, 10 businesses most relevant to the user is provided.
 <br><br>
 
-Yelp is an online platform where users can rate and write reviews on local businesses. Users can also browse the website and/or search local businesses of their interest.
+The script was written in Jupyter Notebooks, and the order of these notebooks is as follows:
 
-To facilitate the user's browsing on Yelp's website, it has been decided to make customized recommendations on local businesses to each user by predicting how much they will be satisfied with the businesses.
+1. yelp executive report.ipnyb
+2. yelp data transformation (part 1).ipnyb
+3. yelp data transformation (part 2).ipnyb
+4. yelp data tranformation (part 3).ipnyb
+5. yelp eda and modelling preparation.ipnyb
+6. yelp modelling
 
-In this hypothetical project, upwards of 120,000 consumer reviews on Yelp are analyzed to study the attributes of successful local businesses and understand the consumer preferences.
+Also please refer to the file named 'requirements.txt' for all dependenceis required to run the necessary codes demonstrated in the notebooks.
 
-Following some exploratory and statistical analyses, a model predicting how much a given consumer will like a business on a continuous scale from 0 to 5 is created.
-
-Finally, as the final product of this project, a customized recommendation system was programmed using the prediction model above such that every user is recommended 10 nearby business locations. This and the following notebooks summarize the findings and results. 
+Note that the data file size was too large to be uploaded to GitHub. You can access the data [Here](https://drive.google.com/drive/folders/1uPvpvE7nKkK8N7y6aaDj6rZjqogURlxu).
+Please ensure these files are located within the yelp_dataset folder.

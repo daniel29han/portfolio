@@ -1,8 +1,9 @@
 *.csv
 *.png
-*.jpg
-*.jpeg
 archives
 .ipynb_checkpoints
-*.json
+*.vectors
 DNU
+*.pkl
+data
+*.json
